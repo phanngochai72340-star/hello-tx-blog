@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beam 叫板中国开源模型：这场"效率赌局"赌的是什么 — Hello, Tx.</title>
+<meta name="description" content="Nvidia 支持的 Reflection 发布首个开权重模型 Beam：501B 参数只激活 23B，主打推理效率，正面叫板 GLM、Kimi 等中国开源模型。">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html">Hello, Tx<span class="grad">.</span></a>
+    <nav class="nav">
+      <a href="../index.html">首页</a>
+      <a href="../archive.html">归档</a>
+      <a href="../about.html">关于</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="切换深色模式">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="article">
+    <div class="article-head">
+      <span class="tag">开源模型</span>
+      <h1>Beam 叫板中国开源模型：这场"效率赌局"赌的是什么</h1>
+      <div class="article-meta"><time>2026-10-06</time><span>Tx</span></div>
+    </div>
+    <div class="article-body">
+      <p>10 月 5 日，路透社头条把"中美开源模型对决"又推上了一个新台阶：由 Nvidia 支持、两位前 DeepMind 研究员 2024 年创立的 Reflection AI，发布了首个开权重模型 Beam。</p>
+      <h2>不拼规模，拼效率</h2>
+      <p>Beam 的参数很有意思：总参数 5010 亿，但每次任务只激活 230 亿。对比一下对手——智谱的 GLM-5.2 是 7440 亿总参数、激活 400 亿。Reflection 的说法是：达到和 GLM-5.2 相当的推理分数，推理算力只需要四分之一到三分之一。权重将在本月内以 Apache 2.0 协议开放。</p>
+      <p>耐人寻味的是，Reflection 自己公布的跑分里，中国的新模型（GLM-5.3、月之暗面的 Kimi K3）大多排在 Beam 前面。公司干脆承认了："拼原始能力拼不过，拼的是推理效率。"——这与其说是示弱，不如说是把赌注摆上了台面。</p>
+      <h2>赌的是什么</h2>
+      <p>这场赌局赌的是开源模型的下一个战场。DeepSeek 之后大家已经看明白：比绝对智能，闭源巨头有算力碾压；但开源的真正战场是"人人用得起"。一个 501B 的模型如果真能以 23B 的成本跑起来，意味着中小公司、个人开发者也能在本地玩转顶级推理能力——"便宜、可定制、够用"，这正是中国开源模型过去两年横扫市场的逻辑。Beam 想用同一套逻辑反杀回去。</p>
+      <p>当然，所有跑分都是公司自报，未经独立验证；权重也还没真正放出来。但在 Nvidia 背书、SpaceX Colossus 2 数据中心算力合作的光环下，Beam 至少证明了一件事：开源路线的竞争，已经从"谁更大"变成了"谁更划算"。对中文读者来说，看着 GLM、Kimi、Qwen 的名字出现在美国公司的对标表格里，本身就是这个时代最有意思的注脚。</p>
+      <div class="source-note">
+        <strong>来源与说明</strong><br>
+        本文基于公开报道整理撰写，非原文转载；跑分数据均为公司自报，未经独立验证。事实来源：
+        <a href="https://www.reuters.com/technology/nvidia-backed-reflection-unveils-first-ai-model-take-chinese-open-models-2026-10-05/" target="_blank" rel="noopener">Reuters</a>、
+        <a href="https://subagentic.ai/posts/reflection-beam-open-weight-moe/" target="_blank" rel="noopener">subagentic.ai</a>。
+      </div>
+    </div>
+    <div class="article-nav">
+      <a href="../index.html">← 返回首页</a>
+      <a href="../archive.html">归档 →</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Tx · hellotx.duckdns.org</p>
+    <p>用好奇心驱动</p>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

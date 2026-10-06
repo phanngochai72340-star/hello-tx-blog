@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +10,9 @@
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="index.html">Hello, Tx<span class="dot">.</span></a>
+    <a class="brand" href="index.html">Hello, Tx<span class="grad">.</span></a>
     <nav class="nav">
       <a href="index.html">首页</a>
-      <a href="tools.html">工具</a>
       <a href="archive.html" class="active">归档</a>
       <a href="about.html">关于</a>
       <button id="theme-toggle" class="theme-toggle" aria-label="切换深色模式">🌙</button>
@@ -22,51 +21,50 @@
 </header>
 
 <main class="wrap">
-  <section class="about-hero">
-    <h1>归档<span class="dot">.</span></h1>
-    <p class="tagline">全部文章，按时间、按标签找。</p>
+  <section class="page-hero">
+    <h1>归档<span class="grad">.</span></h1>
+    <p>全部文章，按时间、按标签找。</p>
   </section>
 
-  <div class="about-body">
-    <section class="tool-section">
+  <div class="page-body" id="archive-body">
+    <section class="archive-group">
       <h2>按标签</h2>
-      <div class="archive-tag" id="tag-折腾">
-        <h3><span class="tag">折腾</span></h3>
-        <ul class="archive-list">
-          <li><time>2026-10-06</time><a href="posts/domain.html">免费域名折腾记：hellotx.duckdns.org</a></li>
-        </ul>
-      </div>
-      <div class="archive-tag" id="tag-ai">
-        <h3><span class="tag">AI 创作</span></h3>
-        <ul class="archive-list">
-          <li><time>2026-10-02</time><a href="posts/ai-video.html">AI 视频创作初体验：真实感是最难的一课</a></li>
-        </ul>
-      </div>
-      <div class="archive-tag" id="tag-创作">
-        <h3><span class="tag">创作</span></h3>
-        <ul class="archive-list">
-          <li><time>2026-10-02</time><a href="posts/vlog.html">北京·上海·广州：一支 10 秒 Vlog 的诞生</a></li>
-        </ul>
-      </div>
-      <div class="archive-tag" id="tag-随笔">
-        <h3><span class="tag">随笔</span></h3>
-        <ul class="archive-list">
-          <li><time>2026-10-06</time><a href="posts/welcome.html">欢迎来到我的博客</a></li>
-        </ul>
-      </div>
     </section>
-
-    <section class="tool-section">
+    <section class="archive-group">
+      <h2><span class="tag">AI 产品</span></h2>
+      <ul class="archive-list">
+        <li><time>2026-10-06</time><a href="posts/openai-dots.html">OpenAI Dots：AI 从"聊天框"变成"数字员工"</a></li>
+      </ul>
+    </section>
+    <section class="archive-group">
+      <h2><span class="tag">AI 政策</span></h2>
+      <ul class="archive-list">
+        <li><time>2026-10-06</time><a href="posts/superintelligence-accord.html">白宫"超级智能协议"："道德约束"管得住 AI 吗？</a></li>
+      </ul>
+    </section>
+    <section class="archive-group">
+      <h2><span class="tag">AI 技术</span></h2>
+      <ul class="archive-list">
+        <li><time>2026-10-06</time><a href="posts/gemini-4-argon.html">Gemini 4 Argon：当 AI 开始自己找漏洞</a></li>
+      </ul>
+    </section>
+    <section class="archive-group">
+      <h2><span class="tag">开源模型</span></h2>
+      <ul class="archive-list">
+        <li><time>2026-10-06</time><a href="posts/reflection-beam.html">Beam 叫板中国开源模型：这场"效率赌局"赌的是什么</a></li>
+      </ul>
+    </section>
+    <section class="archive-group">
       <h2>按时间</h2>
-      <div class="archive-tag">
-        <h3>2026 年 10 月</h3>
-        <ul class="archive-list">
-          <li><time>2026-10-06</time><a href="posts/domain.html">免费域名折腾记：hellotx.duckdns.org</a><span class="tag">折腾</span></li>
-          <li><time>2026-10-06</time><a href="posts/welcome.html">欢迎来到我的博客</a><span class="tag">随笔</span></li>
-          <li><time>2026-10-02</time><a href="posts/ai-video.html">AI 视频创作初体验：真实感是最难的一课</a><span class="tag">AI 创作</span></li>
-          <li><time>2026-10-02</time><a href="posts/vlog.html">北京·上海·广州：一支 10 秒 Vlog 的诞生</a><span class="tag">创作</span></li>
-        </ul>
-      </div>
+    </section>
+    <section class="archive-group">
+      <h2>2026 年 10 月</h2>
+      <ul class="archive-list">
+        <li><time>2026-10-06</time><a href="posts/openai-dots.html">OpenAI Dots：AI 从"聊天框"变成"数字员工"</a><span class="tag">AI 产品</span></li>
+        <li><time>2026-10-06</time><a href="posts/superintelligence-accord.html">白宫"超级智能协议"："道德约束"管得住 AI 吗？</a><span class="tag">AI 政策</span></li>
+        <li><time>2026-10-06</time><a href="posts/gemini-4-argon.html">Gemini 4 Argon：当 AI 开始自己找漏洞</a><span class="tag">AI 技术</span></li>
+        <li><time>2026-10-06</time><a href="posts/reflection-beam.html">Beam 叫板中国开源模型：这场"效率赌局"赌的是什么</a><span class="tag">开源模型</span></li>
+      </ul>
     </section>
   </div>
 </main>
@@ -74,6 +72,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <p>© 2026 Tx · hellotx.duckdns.org</p>
+    <p>用好奇心驱动</p>
   </div>
 </footer>
 
