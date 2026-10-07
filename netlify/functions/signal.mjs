@@ -42,7 +42,20 @@ export default async (req) => {
   // 读取房间状态（轮询用）
   if (req.method === "GET") {
     const code = url.searchParams.get("code");
-    if (!code) return bad("missing code");
+  
+  // ===== DEBUG（联调后删除）=====
+  if (action === "dbgwrite") {
+    await store.setJSON("dbg-key", { t: now(), mark: "hello" });
+    const back = await store.get("dbg-key", { type: "json" });
+    return ok({ wrote: true, readBack: back });
+  }
+  if (action === "dbgread") {
+    const back = await store.get("dbg-key", { type: "json" });
+    const listed = await store.list();
+    return ok({ readBack: back, keys: (listed.blobs||[]).map(b=>b.key).slice(0,10) });
+  }
+
+  if (!code) return bad("missing code");
     const room = await getRoom(store, code);
     if (!room) return bad("房间不存在或已过期", 404);
     return ok({ state: pubState(room) });
@@ -71,6 +84,19 @@ export default async (req) => {
     };
     await saveRoom(store, room);
     return ok({ code: roomCode, pid: p });
+  }
+
+
+  // ===== DEBUG（联调后删除）=====
+  if (action === "dbgwrite") {
+    await store.setJSON("dbg-key", { t: now(), mark: "hello" });
+    const back = await store.get("dbg-key", { type: "json" });
+    return ok({ wrote: true, readBack: back });
+  }
+  if (action === "dbgread") {
+    const back = await store.get("dbg-key", { type: "json" });
+    const listed = await store.list();
+    return ok({ readBack: back, keys: (listed.blobs||[]).map(b=>b.key).slice(0,10) });
   }
 
   if (!code) return bad("missing code");
