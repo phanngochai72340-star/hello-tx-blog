@@ -49,6 +49,20 @@ export default async (req) => {
     const back = await store.get("dbg-key", { type: "json" });
     return ok({ wrote: true, readBack: back });
   }
+
+  if (action === "dbgroom") {
+    const c = String(body.code || "");
+    const raw = await store.get(`room-${c}`);
+    let parsed = null, perr = "";
+    try { parsed = raw ? JSON.parse(raw) : null; } catch(e){ perr = String(e).slice(0,80); }
+    const viaJson = await store.get(`room-${c}`, { type: "json" });
+    return ok({ key: `room-${c}`, rawType: typeof raw, rawLen: raw ? raw.length : -1,
+      parseErr: perr, hasCreated: parsed && ("created" in parsed),
+      created: parsed && parsed.created, nowMs: now(),
+      ttl: 2*3600*1000, expired: parsed ? (now() - parsed.created > 2*3600*1000) : null,
+      viaJsonNull: viaJson === null });
+  }
+
   if (action === "dbgread") {
     const back = await store.get("dbg-key", { type: "json" });
     const listed = await store.list();
@@ -93,6 +107,20 @@ export default async (req) => {
     const back = await store.get("dbg-key", { type: "json" });
     return ok({ wrote: true, readBack: back });
   }
+
+  if (action === "dbgroom") {
+    const c = String(body.code || "");
+    const raw = await store.get(`room-${c}`);
+    let parsed = null, perr = "";
+    try { parsed = raw ? JSON.parse(raw) : null; } catch(e){ perr = String(e).slice(0,80); }
+    const viaJson = await store.get(`room-${c}`, { type: "json" });
+    return ok({ key: `room-${c}`, rawType: typeof raw, rawLen: raw ? raw.length : -1,
+      parseErr: perr, hasCreated: parsed && ("created" in parsed),
+      created: parsed && parsed.created, nowMs: now(),
+      ttl: 2*3600*1000, expired: parsed ? (now() - parsed.created > 2*3600*1000) : null,
+      viaJsonNull: viaJson === null });
+  }
+
   if (action === "dbgread") {
     const back = await store.get("dbg-key", { type: "json" });
     const listed = await store.list();
