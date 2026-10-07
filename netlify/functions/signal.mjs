@@ -11,6 +11,7 @@ const HEADERS = {
 const ROOM_TTL = 2 * 3600 * 1000; // 房间 2 小时过期
 const HB_TIMEOUT = 25000;          // 25s 无心跳视为离线
 const SEATS = 4;
+const IID = Math.random().toString(36).slice(2, 8);
 
 const ok = (d) => new Response(JSON.stringify({ ok: true, ...d }), { headers: HEADERS });
 const bad = (m, s = 400) => new Response(JSON.stringify({ ok: false, error: m }), { status: s, headers: HEADERS });
@@ -56,9 +57,9 @@ export default async (req) => {
     const r = await store.get(`room-${c}`, { type: "json" });
     if (!r) {
       const listed = await store.list({ prefix: `room-${c}` });
-      return ok({ found: false, listKeys: (listed.blobs||[]).map(b=>b.key) });
+      return ok({ iid: IID, found: false, listKeys: (listed.blobs||[]).map(b=>b.key) });
     }
-    return ok({ found: true, created: r.created, nowMs: now(),
+    return ok({ iid: IID, found: true, created: r.created, nowMs: now(),
       ageMs: now() - r.created, ttlMs: 2*3600*1000,
       expired: (now() - r.created) > 2*3600*1000,
       host: r.host, nplayers: Object.keys(r.players||{}).length });
@@ -85,7 +86,7 @@ export default async (req) => {
 
   if (!code) return bad("missing code");
     const room = await getRoom(store, code);
-    if (!room) return bad("房间不存在或已过期", 404);
+    if (!room) { const l = await store.list({ prefix: `room-${code}` }); return bad(`no-room iid=${IID} keys=` + JSON.stringify((l.blobs||[]).map(b=>b.key)), 404); }
     return ok({ state: pubState(room) });
   }
   if (req.method !== "POST") return bad("method not allowed", 405);
@@ -128,9 +129,9 @@ export default async (req) => {
     const r = await store.get(`room-${c}`, { type: "json" });
     if (!r) {
       const listed = await store.list({ prefix: `room-${c}` });
-      return ok({ found: false, listKeys: (listed.blobs||[]).map(b=>b.key) });
+      return ok({ iid: IID, found: false, listKeys: (listed.blobs||[]).map(b=>b.key) });
     }
-    return ok({ found: true, created: r.created, nowMs: now(),
+    return ok({ iid: IID, found: true, created: r.created, nowMs: now(),
       ageMs: now() - r.created, ttlMs: 2*3600*1000,
       expired: (now() - r.created) > 2*3600*1000,
       host: r.host, nplayers: Object.keys(r.players||{}).length });
@@ -157,7 +158,7 @@ export default async (req) => {
 
   if (!code) return bad("missing code");
   const room = await getRoom(store, code);
-  if (!room) return bad("房间不存在或已过期", 404);
+  if (!room) { const l = await store.list({ prefix: `room-${code}` }); return bad(`no-room iid=${IID} keys=` + JSON.stringify((l.blobs||[]).map(b=>b.key)), 404); }
   const me = room.players[pid];
   const isHost = pid && pid === room.host;
   const needMe = () => { if (!me) throw new Error("not in room"); };
