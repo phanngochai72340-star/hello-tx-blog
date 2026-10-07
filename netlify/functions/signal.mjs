@@ -52,6 +52,20 @@ export default async (req) => {
   }
 
 
+
+  if (action === "dbgrt") {
+    const key = "rt-" + now();
+    const obj = { a: 1, nested: { b: [1,2,3] }, s: "hi" };
+    let setErr = "";
+    try { await store.setJSON(key, obj); } catch(e){ setErr = String(e).slice(0,120); }
+    let raw = null, rawErr = "";
+    try { raw = await store.get(key); } catch(e){ rawErr = String(e).slice(0,120); }
+    let js = null, jsErr = "";
+    try { js = await store.get(key, { type: "json" }); } catch(e){ jsErr = String(e).slice(0,120); }
+    return ok({ iid: IID, setErr, rawType: typeof raw, rawPrev: raw ? String(raw).slice(0,80) : raw, rawErr,
+      jsVal: js, jsErr, hasSetJSON: typeof store.setJSON });
+  }
+
   if (action === "dbgwhy") {
     const c = String(body.code || "");
     const r = await store.get(`room-${c}`, { type: "json" });
@@ -123,6 +137,20 @@ export default async (req) => {
     return ok({ wrote: true, readBack: back });
   }
 
+
+
+  if (action === "dbgrt") {
+    const key = "rt-" + now();
+    const obj = { a: 1, nested: { b: [1,2,3] }, s: "hi" };
+    let setErr = "";
+    try { await store.setJSON(key, obj); } catch(e){ setErr = String(e).slice(0,120); }
+    let raw = null, rawErr = "";
+    try { raw = await store.get(key); } catch(e){ rawErr = String(e).slice(0,120); }
+    let js = null, jsErr = "";
+    try { js = await store.get(key, { type: "json" }); } catch(e){ jsErr = String(e).slice(0,120); }
+    return ok({ iid: IID, setErr, rawType: typeof raw, rawPrev: raw ? String(raw).slice(0,80) : raw, rawErr,
+      jsVal: js, jsErr, hasSetJSON: typeof store.setJSON });
+  }
 
   if (action === "dbgwhy") {
     const c = String(body.code || "");
