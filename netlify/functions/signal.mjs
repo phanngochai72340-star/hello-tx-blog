@@ -50,6 +50,20 @@ export default async (req) => {
     return ok({ wrote: true, readBack: back });
   }
 
+
+  if (action === "dbgwhy") {
+    const c = String(body.code || "");
+    const r = await store.get(`room-${c}`, { type: "json" });
+    if (!r) {
+      const listed = await store.list({ prefix: `room-${c}` });
+      return ok({ found: false, listKeys: (listed.blobs||[]).map(b=>b.key) });
+    }
+    return ok({ found: true, created: r.created, nowMs: now(),
+      ageMs: now() - r.created, ttlMs: 2*3600*1000,
+      expired: (now() - r.created) > 2*3600*1000,
+      host: r.host, nplayers: Object.keys(r.players||{}).length });
+  }
+
   if (action === "dbgroom") {
     const c = String(body.code || "");
     const raw = await store.get(`room-${c}`);
@@ -106,6 +120,20 @@ export default async (req) => {
     await store.setJSON("dbg-key", { t: now(), mark: "hello" });
     const back = await store.get("dbg-key", { type: "json" });
     return ok({ wrote: true, readBack: back });
+  }
+
+
+  if (action === "dbgwhy") {
+    const c = String(body.code || "");
+    const r = await store.get(`room-${c}`, { type: "json" });
+    if (!r) {
+      const listed = await store.list({ prefix: `room-${c}` });
+      return ok({ found: false, listKeys: (listed.blobs||[]).map(b=>b.key) });
+    }
+    return ok({ found: true, created: r.created, nowMs: now(),
+      ageMs: now() - r.created, ttlMs: 2*3600*1000,
+      expired: (now() - r.created) > 2*3600*1000,
+      host: r.host, nplayers: Object.keys(r.players||{}).length });
   }
 
   if (action === "dbgroom") {
